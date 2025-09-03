@@ -1,19 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
-        {{ __('Pauzeplanner') }}
+        {{ $employee->name }}
     </x-slot>
 
     <div class="py-6">
-        @if($busy)
-            <div class="mb-4 p-4 bg-red-100">Er is een druk moment bezig. Geen pauzes plannen.</div>
-        @elseif($next)
-            <div class="mb-4 p-4 bg-green-100">Volgende pauze: {{ $next->employee->name }}</div>
-        @endif
-
+        <h2 class="mb-4 font-semibold">Shifts</h2>
         <table class="min-w-full bg-white">
             <thead>
                 <tr class="border-b">
-                    <th class="p-2 text-left">Medewerker</th>
                     <th class="p-2 text-left">Shift</th>
                     <th class="p-2 text-left">Pauzes</th>
                     <th class="p-2 text-left">Acties</th>
@@ -22,7 +16,6 @@
             <tbody>
                 @foreach($shifts as $shift)
                     <tr class="border-b align-top">
-                        <td class="p-2"><a href="{{ route('employees.show', $shift->employee) }}" class="text-blue-600">{{ $shift->employee->name }}</a></td>
                         <td class="p-2">{{ $shift->start_time }} - {{ $shift->end_time }}</td>
                         <td class="p-2">
                             @foreach($shift->breakPeriods as $period)
@@ -45,4 +38,3 @@
         </table>
     </div>
 </x-app-layout>
-

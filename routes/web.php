@@ -5,6 +5,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\BreakController;
 use App\Http\Controllers\BreakRuleController;
+use App\Http\Controllers\BusyPeriodController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,6 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('employees', EmployeeController::class);
     Route::resource('shifts', ShiftController::class);
     Route::resource('break-rules', BreakRuleController::class)->only(['index', 'edit', 'update']);
+    Route::resource('busy-periods', BusyPeriodController::class)->only(['index', 'store', 'destroy']);
     Route::get('breaks', [BreakController::class, 'index'])->name('breaks.index');
     Route::post('breaks/{shift}/confirm', [BreakController::class, 'confirm'])->name('breaks.confirm');
     Route::post('breaks/{shift}/reject', [BreakController::class, 'reject'])->name('breaks.reject');

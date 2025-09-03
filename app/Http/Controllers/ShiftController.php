@@ -10,7 +10,7 @@ class ShiftController extends Controller
 {
     public function index()
     {
-        $shifts = Shift::with('employee', 'breakPeriod')
+        $shifts = Shift::with('employee', 'breakPeriods')
             ->orderBy('start_time')
             ->get();
         return view('shifts.index', compact('shifts'));
@@ -30,8 +30,7 @@ class ShiftController extends Controller
             'end_time' => 'required|date|after:start_time',
         ]);
 
-        $shift = Shift::create($data);
-        $shift->breakPeriod()->create();
+        Shift::create($data);
 
         return redirect()->route('shifts.index');
     }

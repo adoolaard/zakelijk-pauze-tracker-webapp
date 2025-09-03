@@ -27,6 +27,12 @@ class EmployeeController extends Controller
         return redirect()->route('employees.index');
     }
 
+    public function show(Employee $employee)
+    {
+        $shifts = $employee->shifts()->with('breakPeriods')->orderByDesc('start_time')->get();
+        return view('employees.show', compact('employee', 'shifts'));
+    }
+
     public function destroy(Employee $employee)
     {
         $employee->delete();

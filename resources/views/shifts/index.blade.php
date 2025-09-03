@@ -14,7 +14,7 @@
                     <th class="p-2 text-left">Medewerker</th>
                     <th class="p-2 text-left">Begin</th>
                     <th class="p-2 text-left">Einde</th>
-                    <th class="p-2 text-left">Pauze status</th>
+                    <th class="p-2 text-left">Pauzes</th>
                     <th></th>
                 </tr>
             </thead>
@@ -24,7 +24,11 @@
                         <td class="p-2">{{ $shift->employee->name }}</td>
                         <td class="p-2">{{ $shift->start_time }}</td>
                         <td class="p-2">{{ $shift->end_time }}</td>
-                        <td class="p-2">{{ $shift->breakPeriod->status ?? 'pending' }}</td>
+                        <td class="p-2">
+                            @foreach($shift->breakPeriods as $period)
+                                <div>{{ $period->start_time }} - {{ $period->end_time }} ({{ $period->status }})</div>
+                            @endforeach
+                        </td>
                         <td class="p-2">
                             <form method="POST" action="{{ route('shifts.destroy', $shift) }}">
                                 @csrf

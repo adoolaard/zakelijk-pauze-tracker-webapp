@@ -11,7 +11,7 @@
         <ul class="bg-white shadow divide-y">
             @foreach($employees as $employee)
                 <li class="flex justify-between p-4">
-                    <span>{{ $employee->name }}</span>
+                    <a href="{{ route('employees.show', $employee) }}" class="text-blue-600">{{ $employee->name }}</a>
                     <form method="POST" action="{{ route('employees.destroy', $employee) }}">
                         @csrf
                         @method('DELETE')
