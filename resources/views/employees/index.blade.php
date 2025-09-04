@@ -4,8 +4,13 @@
     </x-slot>
 
     <div class="py-6">
-        <div class="mb-4">
+        <div class="mb-4 space-x-2">
             <a href="{{ route('employees.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded">Nieuwe medewerker</a>
+            <form method="POST" action="{{ route('employees.destroyAll') }}" class="inline">
+                @csrf
+                @method('DELETE')
+                <button class="bg-red-500 text-white px-4 py-2 rounded">Verwijder alle</button>
+            </form>
         </div>
 
         <ul class="bg-white shadow divide-y">

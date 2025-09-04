@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\Shift;
+use App\Models\BreakPeriod;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -22,8 +24,14 @@ class EmployeeController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
+            'start_time' => 'required|date',
+            'end_time' => 'required|date|after:start_time',
         ]);
-        Employee::create($data);
+        $employee = Employee::create(['name' => $data['name']]);
+        $employee->shifts()->create([
+            'start_time' => $data['start_time'],
+            'end_time' => $data['end_time'],
+        ]);
         return redirect()->route('employees.index');
     }
 
@@ -36,6 +44,14 @@ class EmployeeController extends Controller
     public function destroy(Employee $employee)
     {
         $employee->delete();
+        return redirect()->route('employees.index');
+    }
+
+    public function destroyAll()
+    {
+        BreakPeriod::truncate();
+        Shift::truncate();
+        Employee::truncate();
         return redirect()->route('employees.index');
     }
 }
