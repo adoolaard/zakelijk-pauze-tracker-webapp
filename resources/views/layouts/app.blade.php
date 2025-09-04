@@ -16,13 +16,13 @@
     </head>
     <body class="font-sans antialiased" x-data="{ open: false }">
         <div class="min-h-screen bg-gray-100 flex">
-            <div :class="{'block': open, 'hidden': !open}" class="fixed inset-0 bg-black bg-opacity-25 sm:hidden" @click="open=false"></div>
-            <nav :class="{'-translate-x-full': !open}" class="fixed sm:static z-30 w-64 bg-white h-full border-r transform transition-transform duration-150 ease-in-out sm:translate-x-0">
+            <div x-show="open" @click="open=false" class="fixed inset-0 bg-black bg-opacity-25 z-20 md:hidden"></div>
+            <nav :class="{'-translate-x-full': !open}" class="fixed inset-y-0 left-0 z-30 w-64 bg-white border-r transform transition-transform duration-150 ease-in-out md:translate-x-0">
                 @include('layouts.navigation')
             </nav>
-            <div class="flex-1 flex flex-col">
-                <header class="bg-white shadow flex items-center justify-between p-4 sm:justify-end">
-                    <button @click="open = !open" class="sm:hidden text-gray-700 focus:outline-none">
+            <div class="flex-1 flex flex-col md:ml-64">
+                <header class="bg-white shadow flex items-center justify-between p-4 md:justify-end">
+                    <button @click="open = !open" class="md:hidden text-gray-700 focus:outline-none">
                         <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
                     </button>
                     @isset($header)
