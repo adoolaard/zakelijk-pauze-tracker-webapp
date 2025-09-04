@@ -24,7 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('employees', [EmployeeController::class, 'destroyAll'])->name('employees.destroyAll');
     Route::resource('employees', EmployeeController::class);
     Route::resource('shifts', ShiftController::class);
-    Route::resource('break-rules', BreakRuleController::class)->only(['index', 'edit', 'update']);
+    Route::resource('break-rules', BreakRuleController::class)->except(['show']);
     Route::resource('busy-periods', BusyPeriodController::class)->only(['index', 'store', 'destroy']);
     Route::get('breaks', [BreakController::class, 'index'])->name('breaks.index');
     Route::post('breaks/bulk-confirm', [BreakController::class, 'bulkConfirm'])->name('breaks.bulk-confirm');
