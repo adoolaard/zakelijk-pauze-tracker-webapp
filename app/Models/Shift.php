@@ -27,9 +27,9 @@ class Shift extends Model
         return $this->belongsTo(Employee::class);
     }
 
-    public function breakPeriod()
+    public function breakPeriods()
     {
-        return $this->hasOne(BreakPeriod::class);
+        return $this->hasMany(BreakPeriod::class);
     }
 
     public function breakMinutes(): int

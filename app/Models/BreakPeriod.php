@@ -25,4 +25,12 @@ class BreakPeriod extends Model
     {
         return $this->belongsTo(Shift::class);
     }
+
+    public function getDurationAttribute(): ?int
+    {
+        if ($this->start_time && $this->end_time) {
+            return $this->start_time->diffInMinutes($this->end_time);
+        }
+        return null;
+    }
 }
