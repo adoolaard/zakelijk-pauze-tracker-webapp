@@ -38,4 +38,28 @@ class Shift extends Model
         $rule = BreakRule::forHours($hours);
         return $rule?->break_minutes ?? 0;
     }
+
+    public function takenBreakMinutes(): int
+    {
+        return $this->breakPeriods
+            ->where('status', 'confirmed')
+            ->sum(fn($period) => $period->duration);
+    }
+
+    public function remainingBreakMinutes(): int
+    {
+        return max(0, $this->breakMinutes() - $this->takenBreakMinutes());
+    }
+
+    public function nextBreakSuggestion(): int
+    {
+        $remaining = $this->remainingBreakMinutes();
+        if ($remaining > 30) {
+            return 30;
+        }
+        if ($remaining > 15) {
+            return 15;
+        }
+        return $remaining;
+    }
 }
