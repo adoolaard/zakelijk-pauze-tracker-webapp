@@ -1,15 +1,14 @@
-<div class="h-full flex flex-col p-4 space-y-2">
-    <a href="{{ route('dashboard') }}" class="font-bold text-xl mb-4 text-gray-800">Pauze Tracker</a>
-    <a href="{{ route('dashboard') }}" class="px-2 py-1 rounded hover:bg-gray-100 text-gray-700">Dashboard</a>
-    <a href="{{ route('employees.index') }}" class="px-2 py-1 rounded hover:bg-gray-100 text-gray-700">Medewerkers</a>
-    <a href="{{ route('shifts.index') }}" class="px-2 py-1 rounded hover:bg-gray-100 text-gray-700">Shifts</a>
-    <a href="{{ route('breaks.index') }}" class="px-2 py-1 rounded hover:bg-gray-100 text-gray-700">Pauzeplanner</a>
-    <a href="{{ route('break-rules.index') }}" class="px-2 py-1 rounded hover:bg-gray-100 text-gray-700">Pauzeregeling</a>
-    <a href="{{ route('busy-periods.index') }}" class="px-2 py-1 rounded hover:bg-gray-100 text-gray-700">Drukke momenten</a>
-    <div class="mt-auto">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <li class="nav-item"><a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ route('employees.index') }}">Medewerkers</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ route('shifts.index') }}">Shifts</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ route('breaks.index') }}">Pauzeplanner</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ route('break-rules.index') }}">Pauzeregeling</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ route('busy-periods.index') }}">Drukke momenten</a></li>
+    <li class="nav-item">
         <form method="POST" action="{{ route('logout') }}">
             @csrf
-            <button class="px-2 py-1 rounded hover:bg-gray-100 text-gray-700 w-full text-left">Uitloggen</button>
+            <button class="btn btn-link nav-link px-0" type="submit">Uitloggen</button>
         </form>
-    </div>
-</div>
+    </li>
+</ul>

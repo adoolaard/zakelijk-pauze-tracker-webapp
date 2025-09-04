@@ -14,25 +14,26 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased" x-data="{ open: false }">
-        <div class="min-h-screen bg-gray-100 flex">
-            <div :class="{'block': open, 'hidden': !open}" class="fixed inset-0 bg-black bg-opacity-25 sm:hidden" @click="open=false"></div>
-            <nav :class="{'-translate-x-full': !open}" class="fixed sm:static z-30 w-64 bg-white h-full border-r transform transition-transform duration-150 ease-in-out sm:translate-x-0">
-                @include('layouts.navigation')
-            </nav>
-            <div class="flex-1 flex flex-col">
-                <header class="bg-white shadow flex items-center justify-between p-4 sm:justify-end">
-                    <button @click="open = !open" class="sm:hidden text-gray-700 focus:outline-none">
-                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
-                    </button>
-                    @isset($header)
-                        <div class="text-gray-800 text-lg">{{ $header }}</div>
-                    @endisset
-                </header>
-                <main class="p-4">
-                    {{ $slot }}
-                </main>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{ route('dashboard') }}">Pauze Tracker</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    @include('layouts.navigation')
+                </div>
             </div>
+        </nav>
+
+        <div class="container mt-4">
+            @isset($header)
+                <div class="mb-4 h5">{{ $header }}</div>
+            @endisset
+            <main>
+                {{ $slot }}
+            </main>
         </div>
     </body>
 </html>
